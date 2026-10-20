@@ -1,0 +1,214 @@
+{
+  "checkedOn": "2026-10-20",
+  "status": "in-progress",
+  "officialCoursePage": "https://w3.impa.br/~landim/lectures.html",
+  "officialPlaylist": "https://www.youtube.com/playlist?list=PLo4jXE-LdDTS5BYqea-LcHdtjKwVcepP7",
+  "observed": "比较前6讲报告中的解释方法与逻辑组织；按用户要求原创重编讲义，不照搬原话、原内容或原课堂顺序。",
+  "videoCoverage": [
+    {
+      "part": 1,
+      "videoId": "Q5bGmDTZQhk",
+      "url": "https://www.youtube.com/watch?v=Q5bGmDTZQhk",
+      "durationSeconds": 3152,
+      "status": "full-duration-analysis-reviewed",
+      "method": "vidIQ音视频分析；已审阅带时间戳的教学方法报告",
+      "limitations": "覆盖全时段为工具报告声明，与元数据时长吻合；未独立验证连续处理，数学转述另行核查。"
+    },
+    {
+      "part": 2,
+      "videoId": "dCs_Nfyp_gY",
+      "url": "https://www.youtube.com/watch?v=dCs_Nfyp_gY",
+      "durationSeconds": 3807,
+      "status": "full-duration-analysis-reviewed",
+      "method": "vidIQ音视频分析；已审阅带时间戳的教学方法报告",
+      "limitations": "覆盖全时段为工具报告声明，与元数据时长吻合；未独立验证连续处理，数学转述另行核查。"
+    },
+    {
+      "part": 3,
+      "videoId": "VNSf9NcEwRA",
+      "url": "https://www.youtube.com/watch?v=VNSf9NcEwRA",
+      "durationSeconds": 3524,
+      "status": "full-duration-analysis-reviewed",
+      "method": "vidIQ音视频分析；已审阅带时间戳的教学方法报告",
+      "limitations": "覆盖全时段为工具报告声明，与元数据时长吻合；未独立验证连续处理，数学转述另行核查。"
+    },
+    {
+      "part": 4,
+      "videoId": "WsYw656mZiM",
+      "url": "https://www.youtube.com/watch?v=WsYw656mZiM",
+      "durationSeconds": 2893,
+      "status": "full-duration-analysis-reviewed",
+      "method": "vidIQ音视频分析；已审阅带时间戳的教学方法报告",
+      "limitations": "覆盖全时段为工具报告声明，与元数据时长吻合；未独立验证连续处理，数学转述另行核查。"
+    },
+    {
+      "part": 5,
+      "videoId": "Q2izi_d4CTE",
+      "url": "https://www.youtube.com/watch?v=Q2izi_d4CTE",
+      "durationSeconds": 3130,
+      "status": "full-duration-analysis-reviewed",
+      "method": "vidIQ音视频分析；已审阅带时间戳的教学方法报告",
+      "limitations": "覆盖全时段为工具报告声明，与元数据时长吻合；未独立验证连续处理，数学转述另行核查。"
+    },
+    {
+      "part": 6,
+      "videoId": "w51HaDt0cvc",
+      "url": "https://www.youtube.com/watch?v=w51HaDt0cvc",
+      "durationSeconds": 5152,
+      "status": "full-duration-analysis-reviewed",
+      "method": "vidIQ音视频分析；已审阅带时间戳的教学方法报告",
+      "limitations": "覆盖全时段为工具报告声明，与元数据时长吻合；未独立验证连续处理，数学转述另行核查。"
+    }
+  ],
+  "parts": 26,
+  "totalDurationSeconds": 97663,
+  "reviewObjective": "研究讲课方式、思路和逻辑，形成原创讲义的解释方法；不按原话或原内容复刻课程。",
+  "reviewedDurationSeconds": 21658,
+  "teachingFindings": [
+    {
+      "title": "从具体问题引出概念",
+      "observation": "第3讲从样本平均的误差进入收敛概念，再从“是否趋零”追问“趋零多快”；第6讲先展示一种自然定义的不足。",
+      "adaptation": "每章先明确已有方法能回答什么、还缺什么，再引入解决缺口的工具。例子围绕估计误差与研究问题重新设计。",
+      "evidence": [
+        {
+          "part": 3,
+          "timestamp": "00:05–14:22",
+          "seconds": 5,
+          "videoId": "VNSf9NcEwRA"
+        },
+        {
+          "part": 3,
+          "timestamp": "35:56–42:02",
+          "seconds": 2156,
+          "videoId": "VNSf9NcEwRA"
+        },
+        {
+          "part": 6,
+          "timestamp": "00:00–11:15",
+          "seconds": 0,
+          "videoId": "w51HaDt0cvc"
+        }
+      ]
+    },
+    {
+      "title": "用同一条关系连接不同表示",
+      "observation": "第1、2讲把映射、原像、事件、分布和期望联系起来，并说明换一种表示后能怎样计算。",
+      "adaptation": "用一个原创模型贯穿多个概念；每次转换符号，都说明对象有没有改变、这次转换带来了什么便利。",
+      "evidence": [
+        {
+          "part": 1,
+          "timestamp": "02:14–05:13",
+          "seconds": 134,
+          "videoId": "Q5bGmDTZQhk"
+        },
+        {
+          "part": 2,
+          "timestamp": "18:17–22:51",
+          "seconds": 1097,
+          "videoId": "dCs_Nfyp_gY"
+        }
+      ]
+    },
+    {
+      "title": "把复杂符号逐层翻译成可理解的命题",
+      "observation": "第4讲把“最终保持在误差范围内”逐层改写为量词和事件；第5讲给内层尾部事件命名，再解释它与“无限次发生”的关系。",
+      "adaptation": "先说清一句话，再逐层引入符号；明确哪些量固定、哪些量可选择、选择依赖什么。只保留必要的辅助记号，让读者能从意思重新推出公式。",
+      "evidence": [
+        {
+          "part": 4,
+          "timestamp": "02:09–12:24",
+          "seconds": 129,
+          "videoId": "WsYw656mZiM"
+        },
+        {
+          "part": 5,
+          "timestamp": "00:05–15:07",
+          "seconds": 5,
+          "videoId": "Q2izi_d4CTE"
+        }
+      ]
+    },
+    {
+      "title": "先交代证明的任务，再展开计算",
+      "observation": "第2讲按对象的复杂程度逐层推广；第6讲将长证明拆为选择、构造和验证，前一段为后一段提供所需性质。",
+      "adaptation": "证明开始给出几步路线；每段先写目标，再说明用到哪个条件，结束时解释已经解决了什么。",
+      "evidence": [
+        {
+          "part": 2,
+          "timestamp": "28:57–43:30",
+          "seconds": 1737,
+          "videoId": "dCs_Nfyp_gY"
+        },
+        {
+          "part": 6,
+          "timestamp": "15:13–51:18",
+          "seconds": 913,
+          "videoId": "w51HaDt0cvc"
+        }
+      ]
+    },
+    {
+      "title": "把定理条件与具体失败联系起来",
+      "observation": "第5讲在证明具体步骤中使用独立性，并对照保证收敛与阻碍有限极限的应用；第6讲用极限退化的例子解释新增条件的作用。",
+      "adaptation": "解释每个关键条件是在防止哪一种失败。选用简短反例，并明确反例说明的边界，避免把例子变成新的技术负担。",
+      "evidence": [
+        {
+          "part": 5,
+          "timestamp": "29:46–52:10",
+          "seconds": 1786,
+          "videoId": "Q2izi_d4CTE"
+        },
+        {
+          "part": 6,
+          "timestamp": "51:19–63:39",
+          "seconds": 3079,
+          "videoId": "w51HaDt0cvc"
+        }
+      ]
+    },
+    {
+      "title": "用几何帮助选择推理步骤",
+      "observation": "首讲用支撑线组织Jensen证明，第3讲用凸函数图形解释参数优化，第6讲用区间位置帮助理解夹逼。",
+      "adaptation": "图像承担解释任务：明确哪些量固定、哪些量变化、想建立什么关系，再转写成公式。先检查用户所需的线性代数和分析基础。",
+      "evidence": [
+        {
+          "part": 1,
+          "timestamp": "44:34–46:48",
+          "seconds": 2674,
+          "videoId": "Q5bGmDTZQhk"
+        },
+        {
+          "part": 3,
+          "timestamp": "42:03–58:44",
+          "seconds": 2523,
+          "videoId": "VNSf9NcEwRA"
+        },
+        {
+          "part": 6,
+          "timestamp": "20:36–51:18",
+          "seconds": 1236,
+          "videoId": "w51HaDt0cvc"
+        }
+      ]
+    },
+    {
+      "title": "结尾给出下一次如何使用的判断顺序",
+      "observation": "首讲区分更精细的界与实际常用形式；第6讲结尾把多个结论归纳为证明收敛的一条路线。",
+      "adaptation": "本章小结包括“遇到哪类问题、先检查什么、怎样选择工具、结果能说明到什么程度”，并配一个新的科研应用情境。",
+      "evidence": [
+        {
+          "part": 1,
+          "timestamp": "52:12–52:25",
+          "seconds": 3132,
+          "videoId": "Q5bGmDTZQhk"
+        },
+        {
+          "part": 6,
+          "timestamp": "84:46–85:50",
+          "seconds": 5086,
+          "videoId": "w51HaDt0cvc"
+        }
+      ]
+    }
+  ]
+}

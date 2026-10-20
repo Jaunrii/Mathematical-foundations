@@ -1,0 +1,416 @@
+{
+  "checkedOn": "2026-10-20",
+  "scope": "桌面“高等概率论”文件夹及其同名子文件夹；只读核查",
+  "files": [
+    {
+      "relativePath": "High-Dimensional Probability (Roman Vershynin) (Z-Library).pdf",
+      "title": "High-Dimensional Probability: An Introduction with Applications in Data Science",
+      "authors": [
+        "Roman Vershynin"
+      ],
+      "edition": "2018年初版",
+      "pages": 299,
+      "type": "book",
+      "verified": "扉页、版权页、目录及既有章节核查；PDF第6–9页",
+      "note": "高维概率与数据科学应用参考。此文件为2018年版本；尚未精读全文。",
+      "completeness": "not_audited_page_by_page"
+    },
+    {
+      "relativePath": "Measure Theory (Donald L. Cohn) (Z-Library).pdf",
+      "title": "Measure Theory",
+      "authors": [
+        "Donald L. Cohn"
+      ],
+      "edition": "第2版",
+      "pages": 154,
+      "type": "book",
+      "verified": "封面、扉页、版权页及末页文本；末页为正文第134页",
+      "note": "本地文件仅154页，止于第4章正文第134页，为不完整文件；不可据此假定后续章节可读。",
+      "completeness": "partial"
+    },
+    {
+      "relativePath": "Measure, Integration  Real Analysis (Sheldon Axler) (Z-Library).pdf",
+      "title": "Measure, Integration & Real Analysis",
+      "authors": [
+        "Sheldon Axler"
+      ],
+      "edition": null,
+      "pages": 430,
+      "type": "book",
+      "verified": "封面、扉页、版权页、目录及既有部分章节核查",
+      "note": "版权页为2020年；作为实分析、测度与积分的参考，尚未精读全文。",
+      "completeness": "not_audited_page_by_page"
+    },
+    {
+      "relativePath": "概率论教程（英文版第三版）course in probability (钟开莱) (Z-Library).pdf",
+      "title": "A Course in Probability Theory／概率论教程（英文版）",
+      "authors": [
+        "Kai Lai Chung（钟开莱）"
+      ],
+      "edition": "第3版",
+      "pages": 437,
+      "type": "book",
+      "verified": "目视核验PDF第1–4页：封面、扉页和版权页",
+      "note": "2010年机械工业出版社英文影印本，原英文第3版版权为2001年；不是缪柏其、胡太忠的同名教材。",
+      "completeness": "not_audited_page_by_page"
+    },
+    {
+      "relativePath": "高等概率论/A Probability Path (Sidney I. Resnick (auth.)) (Z-Library).pdf",
+      "title": "A Probability Path",
+      "authors": [
+        "Sidney I. Resnick"
+      ],
+      "edition": "2005年版本重印本",
+      "pages": 464,
+      "type": "book",
+      "verified": "封面、扉页和版权页文本；PDF第1、4–5页",
+      "note": "2014年重印本，扉页标注Reprint of the 2005 Edition；尚未精读全文。",
+      "completeness": "not_audited_page_by_page"
+    },
+    {
+      "relativePath": "高等概率论/AP-PPT-1.pdf",
+      "title": "高等概率论：第1章 概率空间",
+      "authors": [
+        "胡太忠"
+      ],
+      "edition": null,
+      "pages": 58,
+      "type": "slides",
+      "verified": "目视核验标题、署名、章节目录及前部正文；PDF第1–4页",
+      "note": "AP-PPT-1；2025年9月课程课件，含事件、集合代数、概率空间、扩张、分布与独立性；另有手写批注。",
+      "completeness": "not_audited_page_by_page"
+    },
+    {
+      "relativePath": "高等概率论/AP-PPT-21.pdf",
+      "title": "高等概率论：第2章 随机变量的积分（前半）",
+      "authors": [
+        "胡太忠"
+      ],
+      "edition": null,
+      "pages": 67,
+      "type": "slides",
+      "verified": "目视核验标题、署名、章节目录及前部正文；PDF第1–4页",
+      "note": "AP-PPT-21；2025年9月课程课件，前部从可测映射开始，末页仍为期望相关内容；另有手写批注。",
+      "completeness": "not_audited_page_by_page"
+    },
+    {
+      "relativePath": "高等概率论/AP-PPT-22.pdf",
+      "title": "高等概率论：第2章 随机变量的积分（后半）",
+      "authors": [
+        "胡太忠"
+      ],
+      "edition": null,
+      "pages": 63,
+      "type": "slides",
+      "verified": "目视核验章节目录、T. Hu页脚及§2.5起始正文；PDF第1–4页",
+      "note": "AP-PPT-22；从概率变换与积分继续，目录还列有Radon–Nikodym定理与收敛性；并非另一部教材。",
+      "completeness": "not_audited_page_by_page"
+    },
+    {
+      "relativePath": "高等概率论/AP-PPT-6.pdf",
+      "title": "高等概率论：第6章 极限定理",
+      "authors": [
+        "胡太忠"
+      ],
+      "edition": null,
+      "pages": 73,
+      "type": "slides",
+      "verified": "目视核验标题、署名、章节目录及前部正文；PDF第1–4页",
+      "note": "AP-PPT-6；2025年9月课程课件，目录含弱/强大数律、中心极限定理、正态逼近速度与重对数律。",
+      "completeness": "not_audited_page_by_page"
+    },
+    {
+      "relativePath": "高等概率论/Advanced Probability Theory 高等概率论 荆炳义 含目录 (Bing-Yi JING 荆炳义) (Z-Library).pdf",
+      "title": "Advanced Probability Theory",
+      "authors": [
+        "Bing-Yi Jing（荆炳义）"
+      ],
+      "edition": null,
+      "pages": 246,
+      "type": "notes",
+      "verified": "标题页、完整目录和末页参考文献文本；PDF第1–6、246页",
+      "note": "2012年7月讲义，香港科技大学署名；目录含集合、测度、积分、收敛、极限定理和无限可分分布。按讲义登记，未核实出版版次。",
+      "completeness": "not_audited_page_by_page"
+    },
+    {
+      "relativePath": "高等概率论/Durret.pdf",
+      "title": "概率空间与测度手写笔记（Durret.pdf）",
+      "authors": [],
+      "edition": null,
+      "pages": 6,
+      "type": "notes",
+      "verified": "目视核验PDF第1–4页及其文字提取",
+      "note": "6页手写笔记，含概率空间、测度性质和实线上的测度；作者未署名，不能因文件名而列成Rick Durrett著作。",
+      "completeness": "not_audited_page_by_page"
+    },
+    {
+      "relativePath": "高等概率论/GTM261.pdf",
+      "title": "Probability and Stochastics",
+      "authors": [
+        "Erhan Çınlar"
+      ],
+      "edition": null,
+      "pages": 567,
+      "type": "book",
+      "verified": "既有扉页、版权页、前言、完整目录核查；PDF第4–7、12–14页",
+      "note": "2011年，GTM 261。文件名GTM261.pdf对应本书；含条件期望、鞅、Poisson随机测度、Lévy过程、Brownian运动和Markov过程。",
+      "completeness": "not_audited_page_by_page"
+    },
+    {
+      "relativePath": "高等概率论/Probability (Albert Shiryaev) (Z-Library).pdf",
+      "title": "Probability-2",
+      "authors": [
+        "Albert N. Shiryaev"
+      ],
+      "edition": "第3版",
+      "pages": 356,
+      "type": "book",
+      "verified": "封面、扉页、版权页、前言及末页索引文本；PDF第1、4–6、356页",
+      "note": "文件名仅写Probability，实际为2019年的Probability-2（第2卷），不是Probability-1的重复副本。前言说明本卷收第4–8章；译者R. P. Boas与D. M. Chibisov并非本书作者。",
+      "completeness": "not_audited_page_by_page"
+    },
+    {
+      "relativePath": "高等概率论/Probability Theory A Comprehensive Course (Achim Klenke) (Z-Library).pdf",
+      "title": "Probability Theory: A Comprehensive Course",
+      "authors": [
+        "Achim Klenke"
+      ],
+      "edition": "第3版",
+      "pages": 718,
+      "type": "book",
+      "verified": "封面、扉页、版权页、前言及既有完整目录核查",
+      "note": "2020年版本；前言强调测度论与概率应用交错安排。尚未精读全文。",
+      "completeness": "not_audited_page_by_page"
+    },
+    {
+      "relativePath": "高等概率论/Probability Theory and Examples (Rick Durrett) (Z-Library).pdf",
+      "title": "Probability: Theory and Examples",
+      "authors": [
+        "Rick Durrett"
+      ],
+      "edition": "第5版",
+      "pages": 432,
+      "type": "book",
+      "verified": "内容介绍、扉页、版权页、前言及既有目录核查；PDF第2、6–12页",
+      "note": "2019年版本；完整教材文件与6页Durret.pdf手写笔记分别登记。尚未精读全文。",
+      "completeness": "not_audited_page_by_page"
+    },
+    {
+      "relativePath": "高等概率论/Probability and Measure, Third Edition (Wiley Series in Probability and Statistics) (Patrick Billingsley) (Z-Library).pdf",
+      "title": "Probability and Measure",
+      "authors": [
+        "Patrick Billingsley"
+      ],
+      "edition": "第3版",
+      "pages": 608,
+      "type": "book",
+      "verified": "目视核验扉页标题、作者和版次（PDF第3页），并读前言文本（PDF第6页）",
+      "note": "前言说明以概率例子推动测度与积分的引入；扉页已确认Patrick Billingsley与第3版。尚未精读全文。",
+      "completeness": "not_audited_page_by_page"
+    },
+    {
+      "relativePath": "高等概率论/Probability with martingales (Williams, David) (Z-Library).pdf",
+      "title": "Probability with Martingales",
+      "authors": [
+        "David Williams"
+      ],
+      "edition": null,
+      "pages": 268,
+      "type": "book",
+      "verified": "扉页、版权页、目录文本；PDF第2、4–9页",
+      "note": "1991年首版，当前文件版权页标注2010年第12次印刷；以分枝过程引入条件期望与鞅。印次不当作版次。",
+      "completeness": "not_audited_page_by_page"
+    },
+    {
+      "relativePath": "高等概率论/Probability-1. Vol.1 (Širjaev, Alʹbert N Dmitry M. Chibisov) (Z-Library).pdf",
+      "title": "Probability-1",
+      "authors": [
+        "Albert N. Shiryaev"
+      ],
+      "edition": "第3版",
+      "pages": 501,
+      "type": "book",
+      "verified": "封面、扉页、版权页、前言及末页索引文本；PDF第1、4–6、501页",
+      "note": "2016年版本（第1卷），前言说明收第1–3章；与Probability-2配套。文件名中的D. M. Chibisov是译者，不列为共同作者。",
+      "completeness": "not_audited_page_by_page"
+    },
+    {
+      "relativePath": "高等概率论/概率论教程 (缪柏其 胡太忠) (Z-Library).pdf",
+      "title": "概率论教程",
+      "authors": [
+        "缪柏其",
+        "胡太忠"
+      ],
+      "edition": "第2版",
+      "pages": 323,
+      "type": "book",
+      "verified": "既有目视核验封面、扉页、版权页、前言及完整目录；PDF第1、3–4、8–10、13–15页",
+      "note": "2009年中国科学技术大学出版社；六章依次为概率空间、随机变量的积分、乘积空间和随机函数、条件期望和鞅序列、分布函数和特征函数、极限定理。尚未精读全文。",
+      "completeness": "not_audited_page_by_page"
+    },
+    {
+      "relativePath": "高等概率论/概率论教程 第三版 练习.pdf",
+      "title": "概率论教程 第三版 练习（文件名）",
+      "authors": [],
+      "edition": null,
+      "pages": 25,
+      "type": "exercises",
+      "verified": "目视核验PDF第1–4页的印刷习题及标注",
+      "note": "25页习题摘录，无书名页或版权页；“第三版”来自文件名，尚未独立核实作者和版次，不据此把323页主教材改标成第三版。",
+      "completeness": "not_audited_page_by_page"
+    },
+    {
+      "relativePath": "高等概率论/概率论草稿纸.pdf",
+      "title": "概率论草稿纸",
+      "authors": [],
+      "edition": null,
+      "pages": 5,
+      "type": "notes",
+      "verified": "目视核验PDF第1–4页",
+      "note": "5页题目剪贴与手写演算，作者未署名；作为学习记录登记，不作为权威解答。",
+      "completeness": "not_audited_page_by_page"
+    },
+    {
+      "relativePath": "高等概率论/测度与概率 第二版 (严士健刘秀芳) (Z-Library).pdf",
+      "title": "测度与概率",
+      "authors": [
+        "严士健",
+        "刘秀芳"
+      ],
+      "edition": "第2版",
+      "pages": 307,
+      "type": "book",
+      "verified": "目视核验封面、扉页、内容简介和版权页；PDF第1–4页",
+      "note": "2003年第2版，北京师范大学出版社；版权页标注2006年第2次印刷。内容简介明确把测度与概率基本内容相互联系。",
+      "completeness": "not_audited_page_by_page"
+    },
+    {
+      "relativePath": "高等概率论/测度论与概率论基础 (程士宏) (Z-Library).pdf",
+      "title": "测度论与概率论基础",
+      "authors": [
+        "程士宏"
+      ],
+      "edition": "第1版",
+      "pages": 254,
+      "type": "book",
+      "verified": "目视核验扉页、版权页与内容简介；PDF第1–4页",
+      "note": "2004年北京大学出版社；内容简介以测度与积分为基础连接概率论。尚未精读全文。",
+      "completeness": "not_audited_page_by_page"
+    },
+    {
+      "relativePath": "高等概率论/测度论基础与高等概率论 上册 (袁德美, 王学军) (Z-Library).pdf",
+      "title": "测度论基础与高等概率论（上册）",
+      "authors": [
+        "袁德美",
+        "王学军"
+      ],
+      "edition": "第1版",
+      "pages": 338,
+      "type": "book",
+      "verified": "目视核验封面、扉页、版权页和前言；PDF第1–4页",
+      "note": "2023年科学出版社；上册为第1–12章，其中第1–2章预备知识、第3–12章测度论基础。与下册为同一套书的两个分卷。",
+      "completeness": "not_audited_page_by_page"
+    },
+    {
+      "relativePath": "高等概率论/测度论基础与高等概率论 下册 (袁德美 王学军 编著) (Z-Library).pdf",
+      "title": "测度论基础与高等概率论（下册）",
+      "authors": [
+        "袁德美",
+        "王学军"
+      ],
+      "edition": "第1版",
+      "pages": 373,
+      "type": "book",
+      "verified": "目视核验封面、扉页、版权页与目录首页；PDF第1–4页",
+      "note": "2023年科学出版社；下册为第13–25章，其中第19–25章为概率论极限理论；与上册为同一套书的两个分卷。",
+      "completeness": "not_audited_page_by_page"
+    },
+    {
+      "relativePath": "高等概率论/测度论基础与高等概率论学习指导 上册 (袁德美 王学军 编著 etc.) (Z-Library).pdf",
+      "title": "测度论基础与高等概率论学习指导（上册）",
+      "authors": [
+        "袁德美",
+        "王学军"
+      ],
+      "edition": "第1版",
+      "pages": 302,
+      "type": "guide",
+      "verified": "目视核验封面、扉页、版权页和前言；PDF第1–4页",
+      "note": "2023年科学出版社；配套上册的内容提要与习题解析。文件夹中仅找到学习指导上册，未找到学习指导下册。",
+      "completeness": "not_audited_page_by_page"
+    },
+    {
+      "relativePath": "高等概率论/测度论讲义 (严加安) (Z-Library).pdf",
+      "title": "测度论讲义",
+      "authors": [
+        "严加安"
+      ],
+      "edition": "第2版",
+      "pages": 305,
+      "type": "book",
+      "verified": "扉页、版权页、内容简介文本；PDF第2–3页",
+      "note": "2004年科学出版社；简介涵盖测度与积分、测度弱收敛与淡收敛，并增补离散时间鞅、Hilbert与Banach空间上的测度。尚未精读全文。",
+      "completeness": "not_audited_page_by_page"
+    },
+    {
+      "relativePath": "高等概率论/现代概率论基础(纠斜-书签) (汪嘉冈) (Z-Library).pdf",
+      "title": "现代概率论基础",
+      "authors": [
+        "汪嘉冈"
+      ],
+      "edition": "第2版",
+      "pages": 208,
+      "type": "book",
+      "verified": "目视核验封面、版权页和内容提要；PDF第1–4页",
+      "note": "2005年复旦大学出版社；书目登记保留原文件的纠斜与书签说明，未将其当作独立版本。尚未精读全文。",
+      "completeness": "not_audited_page_by_page"
+    },
+    {
+      "relativePath": "高等概率论/第一章习题.pdf",
+      "title": "第一章习题",
+      "authors": [],
+      "edition": null,
+      "pages": 6,
+      "type": "exercises",
+      "verified": "目视核验PDF第1–4页的印刷习题与圈注",
+      "note": "6页扫描习题，前4页内容与25页“概率论教程 第三版 练习”前4页重复但批注不同；保留为独立文件，不计作另一部书。",
+      "completeness": "not_audited_page_by_page"
+    },
+    {
+      "relativePath": "高等概率论/高等概率论第一章部分习题答案.pdf",
+      "title": "高等概率论第一章部分习题答案",
+      "authors": [],
+      "edition": null,
+      "pages": 9,
+      "type": "exercises",
+      "verified": "目视核验PDF第1–4页的手写解答",
+      "note": "9页手写答案，未核实作者身份，也未校验解答正确性。",
+      "completeness": "not_audited_page_by_page"
+    },
+    {
+      "relativePath": "高等概率论/高等概率论第二章作业答案.pdf",
+      "title": "高等概率论第二章作业答案",
+      "authors": [],
+      "edition": null,
+      "pages": 10,
+      "type": "exercises",
+      "verified": "核对PDF页数，并目视核验首部题目与手写解答；PDF第1页",
+      "note": "10页作业答案，未核实作者身份，也未校验解答正确性。",
+      "completeness": "not_audited_page_by_page"
+    }
+  ],
+  "counts": {
+    "book": 19,
+    "slides": 4,
+    "notes": 3,
+    "exercises": 4,
+    "guide": 1
+  },
+  "fileCount": 31,
+  "countNote": "31是PDF文件数，不是31部独立教材。19个教材分卷文件（其中Cohn为残缺文件）、1个学习指导、4个课件、4个习题/答案文件及3个讲义/笔记文件。Shiryaev和袁德美/王学军的上下卷分别登记；同题习题文件保留但不重复计作书。",
+  "limitations": [
+    "核查书目、页数和指定页面，不等于精读全部教材。",
+    "除已确认的Cohn残缺外，其他文件尚未逐页检查完整性。",
+    "作者为空表示当前检查页未能确认，不从文件名或手写签名猜测。"
+  ]
+}
