@@ -8,42 +8,79 @@ let answers={};
 let persistent=true;
 try{answers=JSON.parse(localStorage.getItem(key)||"{}");}catch{persistent=false;}
 let toastTimer;
+const publishedLessons=()=>Object.entries(C.lessons||{}).filter(([,lesson])=>lesson?.html).map(([day,lesson])=>({day:Number(day),...lesson})).sort((a,b)=>a.day-b.day);
+const isPublished=n=>Boolean(C.lessons?.[n]?.html);
+const publicationDate=lesson=>lesson?.publishedOn||lesson?.publishedDate||"";
+const displayDate=value=>String(value||"").replaceAll("-",".");
+let lessonAnswers={};
+let lessonPersistent=true;
+let assessmentContext=null;
 function toast(message){$("#toast").textContent=message;$("#toast").classList.add("show");clearTimeout(toastTimer);toastTimer=setTimeout(()=>$("#toast").classList.remove("show"),3000);}
 function save(){try{localStorage.setItem(key,JSON.stringify(answers));return true;}catch{persistent=false;toast("本浏览器无法保存，请复制或导出答案。");return false;}}
 function phaseDays(p){return C.curriculum.days.filter(d=>d.phase===p.id);}
 function nav(){
   const query=$("#search").value.trim().toLowerCase();
-  let html=`<a href="#home">课程首页</a><a href="#diagnostic">00 · 入学诊断</a><a href="#roadmap">60 天完整路线</a><a href="#method">学习、复习与考核</a><a href="#sources">教材与参考资料</a><div class="nav-label">正式课程 · 规划中</div>`;
+  const published=publishedLessons();
+  let html=`<a href="#home">课程首页</a>${published.length?`<a href="#day-${published.at(-1).day}">最新讲义 · 第 ${published.at(-1).day} 天</a>`:""}<a href="#diagnostic">00 · 入学诊断</a><a href="#roadmap">60 天完整路线</a><a href="#method">学习、复习与考核</a><a href="#sources">教材与参考资料</a><div class="nav-label">正式课程 · 已发布 ${published.length} / 60</div>`;
   let matches=0;
   for(const p of C.curriculum.phases){
     const ds=phaseDays(p).filter(d=>!query||[d.title,d.goal,d.bridge,d.confusion,d.day].join(" ").toLowerCase().includes(query));
     if(!ds.length)continue;
     matches+=ds.length;
-    html+=`<details ${query||location.hash.startsWith("#day-")&&ds.some(d=>location.hash===`#day-${d.day}`)?"open":""}><summary>${E(p.title)}</summary>${ds.map(d=>`<a href="#day-${d.day}"><span>${String(d.day).padStart(2,"0")}</span>${E(d.title)}</a>`).join("")}</details>`;
+    html+=`<details ${query||location.hash.startsWith("#day-")&&ds.some(d=>location.hash===`#day-${d.day}`)?"open":""}><summary>${E(p.title)}</summary>${ds.map(d=>`<a href="#day-${d.day}"><span>${String(d.day).padStart(2,"0")}</span>${E(d.title)}<small class="nav-status ${isPublished(d.day)?"published":""}">${isPublished(d.day)?"已发布":"规划"}</small></a>`).join("")}</details>`;
   }
   if(query&&!matches)html+=`<p class="empty">没有找到相关课程。</p>`;
   $("#navigation").innerHTML=html;
   document.querySelectorAll("nav a").forEach(a=>{const active=a.hash===(location.hash||"#home");a.classList.toggle("active",active);if(active)a.setAttribute("aria-current","page");});
 }
-const pending=`<div class="notice"><strong>当前是准备阶段，正式讲义尚未开课。</strong>你要求先完整观看指定课程视频。这个前提尚未完成，当前先做教材整理与课程准备；正式 60 天在前提完成后开始计数。目录中的第 1–60 天是课程规划，不能当作已完成的讲义。</div>`;
+function courseStatus(){const published=publishedLessons();return published.length?`<div class="notice"><strong>正式课程已开始 · 已发布 ${published.length} / 60 天</strong>课程采用前 6 讲总结的教学方法，后续视频研究用于改进讲义。标为“规划”的章节尚未发布；学习日按实际学习进度推进。</div>`:`<div class="notice"><strong>课程目录已整理，正式讲义待发布。</strong>目录中的条目是学习规划，已发布的讲义会在首页单独列出。</div>`;}
 function home(){
+  const published=publishedLessons();
+  const latest=published.at(-1);
+  const latestPlan=latest&&C.curriculum.days.find(d=>d.day===latest.day);
   const cards=C.curriculum.phases.map((p,i)=>{const ds=phaseDays(p);return `<a class="phase-card" href="#day-${ds[0].day}"><span class="num">${String(i+1).padStart(2,"0")}</span><small>DAY ${String(ds[0].day).padStart(2,"0")}—${String(ds.at(-1).day).padStart(2,"0")}</small><h3>${E(p.title)}</h3><p>${E(ds[0].bridge)}</p></a>`;}).join("");
-  return `<section class="hero"><div><div class="eyebrow">课程总览</div><h1>概率论与随机过程</h1><p>测度论、实分析、高等概率论、高维概率论与随机过程的 60 天自学课程。</p><div class="actions"><a class="button primary" href="#diagnostic">查看入学诊断 →</a><a class="button" href="#roadmap">查看学习路线</a></div></div></section>
-  <div class="meta-strip"><div><strong>60 <small>正式学习日 · 含复习考核</small></strong></div><div><strong>2–3 h<small>每天的学习投入</small></strong></div><div><strong>08:00<small>北京时间 · 准备任务起点</small></strong></div></div>
-  ${pending}<div class="section-heading"><h2>课程目录</h2><span>课程蓝图 / 可逐日查看</span></div><div class="phase-grid">${cards}</div>
+  return `<section class="hero"><div><div class="eyebrow">课程总览</div><h1>概率论与随机过程</h1><p>测度论、实分析、高等概率论、高维概率论与随机过程的 60 天自学课程。</p><div class="actions"><a class="button primary" href="${latest?`#day-${latest.day}`:"#diagnostic"}">${latest?`开始第 ${latest.day} 天学习`:"查看入学诊断"} →</a><a class="button" href="#roadmap">查看学习路线</a></div></div></section>
+  <div class="meta-strip"><div><strong>${published.length} / 60<small>已发布讲义 / 正式学习日</small></strong></div><div><strong>2–3 h<small>每天的学习投入</small></strong></div><div><strong>08:00<small>北京时间 · 每日准备时间</small></strong></div></div>
+  ${latest?`<section class="latest-lesson"><div class="eyebrow">最新讲义 · ${E(displayDate(publicationDate(latest)))} 发布</div><h2><a href="#day-${latest.day}">第 ${latest.day} 天 · ${E(latest.title||latestPlan?.title)}</a></h2><p>${E(latest.summary||latestPlan?.goal||"")}</p><a class="button primary" href="#day-${latest.day}">阅读讲义与作答 →</a><p class="subtle">含学习路线、例子、易混淆点、本章小结与考核。作答提交到聊天后批改。</p></section>`:""}
+  ${courseStatus()}<div class="section-heading"><h2>课程目录</h2><span>已发布讲义与后续规划</span></div><div class="phase-grid">${cards}</div>
   <section class="section-card"><h2>练习与考核</h2><p>每一章都要完成四件事：用自己的话解释，算一个具体例子，检查定理条件，把方法迁移到一个新问题。每天的答案提交到聊天后，再给出批改、补救和延迟复测。</p><a href="#method">查看考核要求 →</a></section>`;
 }
 function roadmap(){
-  return `<div class="eyebrow">学习计划</div><h1>60 天完整路线</h1><p class="page-intro">正式课程的相对日序。第 7、14、21、28、35、42、49、56 天用于综合考核与补救；最后 4 天完成研究工具选择与综合应用。进度以实际理解为依据，诊断和等待材料不消耗这 60 天。</p>${pending}${C.curriculum.phases.map(p=>`<h2>${E(p.title)}</h2><table class="roadmap"><thead><tr><th>天</th><th>学习主题与可检验成果</th><th>类型</th></tr></thead><tbody>${phaseDays(p).map(d=>`<tr><td>${String(d.day).padStart(2,"0")}</td><td><a href="#day-${d.day}">${E(d.title)}</a><div class="subtle">${E(d.goal)}</div></td><td>${d.kind==="review"?"复习考核":"学习规划"}</td></tr>`).join("")}</tbody></table>`).join("")}`;
+  return `<div class="eyebrow">学习计划</div><h1>60 天完整路线</h1><p class="page-intro">正式课程的相对日序。第 7、14、21、28、35、42、49、56 天用于综合考核与补救；最后 4 天完成研究工具选择与综合应用。进度以实际理解为依据，诊断和等待材料不消耗这 60 天。</p>${courseStatus()}${C.curriculum.phases.map(p=>`<h2>${E(p.title)}</h2><div class="table-scroll"><table class="roadmap"><thead><tr><th>天</th><th>学习主题与可检验成果</th><th>状态</th></tr></thead><tbody>${phaseDays(p).map(d=>`<tr><td>${String(d.day).padStart(2,"0")}</td><td><a href="#day-${d.day}">${E(d.title)}</a><div class="subtle">${E(d.goal)}</div></td><td>${isPublished(d.day)?"已发布":"规划"}${d.kind==="review"?"<br>复习考核":""}</td></tr>`).join("")}</tbody></table></div>`).join("")}`;
 }
 function day(n){
   const d=C.curriculum.days.find(d=>d.day===n);
   if(!d)return `<h1>未找到这一天</h1><a href="#roadmap">返回完整路线</a>`;
   const p=C.curriculum.phases.find(p=>p.id===d.phase);
-  const lesson=C.lessons?.[n];
-  return `<div class="eyebrow">DAY ${String(n).padStart(2,"0")} / ${E(p?.title)}</div><h1>${E(d.title)}</h1><div class="lesson-status"><span class="tag">${lesson?"已发布讲义":"课程规划 · 正文待编写"}</span><span class="date">预计学习 2–3 小时${d.kind==="review"?" · 复习考核日":""}</span></div>
-  ${lesson?lesson.html:`<div class="notice">这里展示这一天的学习目标与设计。正式正文将在视频前提完成后逐日编写；当前没有把目录条目当作讲义交付。</div><div class="reading"><section class="section-card"><h2>学完后，你要能做到</h2><p>${E(d.goal)}</p></section><section class="section-card"><h2>这与概率有什么关系？</h2><p>${E(d.bridge)}</p></section><section class="section-card"><h2>要特别辨清的地方</h2><p>${E(d.confusion)}</p></section><section class="section-card"><h2>将如何检查理解</h2><p>${E(d.check)}</p></section><details class="reveal"><summary>展开：正式章节会包含什么</summary><ol>${C.policy.chapterRequirements.map(t=>`<li>${E(t)}</li>`).join("")}</ol></details></div>`}
-  <div class="pagination">${n>1?`<a href="#day-${n-1}">← 第 ${n-1} 天</a>`:`<a href="#diagnostic">← 入学诊断</a>`}<a href="#roadmap">全部课程</a>${n<60?`<a href="#day-${n+1}">第 ${n+1} 天 →</a>`:`<a href="#method">考核与后续 →</a>`}</div>`;
+  const lesson=isPublished(n)?C.lessons[n]:null;
+  return `<div class="eyebrow">DAY ${String(n).padStart(2,"0")} / ${E(p?.title)}</div><h1>${E(lesson?.title||d.title)}</h1><div class="lesson-status"><span class="tag">${lesson?"已发布讲义":"课程规划 · 正文待发布"}</span><span class="date">${lesson&&publicationDate(lesson)?`${E(displayDate(publicationDate(lesson)))} 发布 · `:""}预计学习 ${E(lesson?.duration||"2–3 小时")}${d.kind==="review"?" · 复习考核日":""}</span></div>
+  ${lesson?`<div id="lesson-toc"></div><article class="lesson-content reading">${lesson.html}</article>${lesson.assessment?lessonAssessment(n,lesson):""}`:`<div class="notice">这一天的完整讲义尚未发布。下面是学习目标与设计；后续将随学习进度更新。</div><div class="reading"><section class="section-card"><h2>学完后，你要能做到</h2><p>${E(d.goal)}</p></section><section class="section-card"><h2>这与概率有什么关系？</h2><p>${E(d.bridge)}</p></section><section class="section-card"><h2>要特别辨清的地方</h2><p>${E(d.confusion)}</p></section><section class="section-card"><h2>将如何检查理解</h2><p>${E(d.check)}</p></section><details class="reveal"><summary>展开：正式章节会包含什么</summary><ol>${C.policy.chapterRequirements.map(t=>`<li>${E(t)}</li>`).join("")}</ol></details></div>`}
+  <div class="pagination">${n>1?`<a href="#day-${n-1}">← 第 ${n-1} 天${isPublished(n-1)?"":" · 待发布"}</a>`:`<a href="#home">← 课程首页</a>`}<a href="#roadmap">全部课程</a>${n<60?`<a href="#day-${n+1}">第 ${n+1} 天${isPublished(n+1)?"":" · 待发布"} →</a>`:`<a href="#method">考核与后续 →</a>`}</div>`;
+}
+function lessonAssessment(n,lesson){
+  const assessment=lesson.assessment;
+  const storageKey=`probability-notebook-lesson-v1:${n}:${assessment.id||"assessment"}`;
+  lessonAnswers={};lessonPersistent=true;
+  try{const saved=JSON.parse(localStorage.getItem(storageKey)||"{}");if(saved&&typeof saved==="object"&&!Array.isArray(saved))lessonAnswers=saved;}catch{lessonPersistent=false;}
+  assessmentContext={day:n,lesson,assessment,storageKey};
+  const total=assessment.questions.reduce((sum,q)=>sum+Number(q.points||0),0);
+  return `<section id="lesson-assessment" class="lesson-assessment reading" tabindex="-1"><h2>本章考核与提交</h2><p class="subtle">${assessment.questions.length} 题 · 共 ${total} 分。写出理由与条件；不确定的地方请标明。</p><div class="notice"><strong>作答只保存在本浏览器，需复制到聊天提交。</strong>这里不自动评分，也不会把打开或填写页面计作考核通过。</div>${assessment.questions.map((q,i)=>`<section class="section-card"><div class="question-heading"><h3>${i+1}. ${E(q.title)}</h3><small>${E(q.points)} 分</small></div><div class="question-prompt">${q.promptHtml||E(q.prompt||q.text||"")}</div><label class="answer-label" for="lesson-answer-${i}">你的答案、理由与把握程度</label><textarea id="lesson-answer-${i}" data-lesson-answer="${E(q.id)}" placeholder="写出你的推理，并检查用到的条件。">${E(lessonAnswers[q.id]||"")}</textarea></section>`).join("")}<section class="export-area"><h3>提交本章作答</h3><p class="subtle">生成答案后复制到当前聊天发送，或下载文本备份。批改与后续复习安排以聊天中的反馈为准。</p><button id="lesson-export" type="button">生成可复制答案</button><button id="lesson-download" type="button">下载作答备份</button><p id="lesson-save-state" class="save-state" role="status" aria-live="polite">${lessonPersistent?"本机保存已启用 · 本页不记录提交结果":"本浏览器保存不可用，请及时复制或导出"}</p><div id="lesson-export-output"></div></section></section>`;
+}
+function lessonExportText(){
+  if(!assessmentContext)return "";
+  const {day,lesson,assessment}=assessmentContext;
+  return `概率论与随机过程 · 第 ${day} 天考核作答\n章节：${lesson.title||C.curriculum.days.find(d=>d.day===day)?.title||""}\n考核编号：${assessment.id||`day-${day}`}\n日期：${new Date().toLocaleDateString("zh-CN",{timeZone:"Asia/Shanghai"})}\n\n`+assessment.questions.map((q,i)=>`${i+1}. ${q.title}（${q.points} 分）\n${lessonAnswers[q.id]||"未作答"}\n`).join("\n")+"\n请逐题批改，标注概念/计算/条件/表达问题，给出补救建议并安排复习。";
+}
+function downloadText(value,filename){const blob=new Blob([value],{type:"text/plain;charset=utf-8"});const u=URL.createObjectURL(blob);const a=document.createElement("a");a.href=u;a.download=filename;a.click();setTimeout(()=>URL.revokeObjectURL(u),1000);}
+function makeLessonToc(){
+  const host=$("#lesson-toc");
+  if(!host)return;
+  const headings=[...document.querySelectorAll(".lesson-content h2, .lesson-content h3")];
+  headings.forEach((h,i)=>{if(!h.id)h.id=`lesson-section-${i+1}`;h.tabIndex=-1;});
+  const tocHeadings=headings.filter(h=>h.tagName==="H2");
+  document.querySelectorAll(".lesson-content table").forEach(table=>{if(!table.parentElement.classList.contains("table-scroll")){const wrapper=document.createElement("div");wrapper.className="table-scroll";table.before(wrapper);wrapper.append(table);}});
+  host.innerHTML=`<details class="lesson-toc" open><summary>本章目录</summary><ol>${tocHeadings.map(h=>`<li><button type="button" data-scroll-target="${E(h.id)}">${E(h.textContent)}</button></li>`).join("")}${$("#lesson-assessment")?`<li><button type="button" data-scroll-target="lesson-assessment">本章考核与提交</button></li>`:""}</ol></details>`;
+  document.querySelectorAll("[data-scroll-target]").forEach(button=>button.addEventListener("click",()=>{const target=document.getElementById(button.dataset.scrollTarget);if(target){target.scrollIntoView({behavior:"smooth",block:"start"});target.focus({preventScroll:true});}}));
 }
 function diagnostic(){
   const d=C.diagnostic;
@@ -62,18 +99,20 @@ function method(){
   <h2>每个定理都配一张调用卡</h2><section class="section-card"><ol><li>我要解决哪类问题？</li><li>输入对象是什么，结论能给我什么？</li><li>每个条件怎么检查？</li><li>一个完整的使用例子。</li><li>删掉某个条件时，哪里可能失败？</li><li>与之前哪个工具相似，又有什么不同？</li></ol></section>
   <h2>怎样考核</h2><table class="score-table"><tbody><tr><td>概念解释：用自己的话解释，并给例子</td><td>25</td></tr><tr><td>计算与推理：步骤有效，能说明理由</td><td>25</td></tr><tr><td>条件检查与反例：知道何时不能用</td><td>25</td></tr><tr><td>迁移与表达：在新情境中选对工具</td><td>25</td></tr></tbody></table><p>这是正式课程的评分维度；入学诊断使用题目旁列出的分值。</p><ul><li><strong>80 分及以上且无核心概念错误：</strong>进入下一主题，并保留延迟复测。</li><li><strong>60–79 分：</strong>先用 20–30 分钟补救，再做一道变式。</li><li><strong>低于 60 分或有核心概念错误：</strong>补基础，缩减可选拓展，不硬推进依赖该概念的新内容。</li></ul><p>批改会保留你的原始答案、错因、修订答案和复测结果。没有交作业时只标为“未评估”；打开网页、读完、自报理解均不等于考核通过。</p>
   <h2>深度边界</h2><p>优先掌握测度与积分的概率语言、收敛与极限交换、条件期望、大数定律和中心极限定理、集中不等式，以及离散过程和经典连续过程的基本结构。外测度构造、一般测度分解的长证明、泛函分析全貌、完整随机微积分和一般随机过程理论留作后续。布朗运动先理解定义、协方差与路径性质；Itô 积分只作为后续入口。</p>
-  <h2>什么会让进度调整</h2><p>诊断结果、每周考核和研究方向都会改变练习与选修内容。可以压缩拓展，不能为了凑足日历而删去理解所需的复习。正式起始日仍待视频前提完成；当前每日上午任务先服务于准备。</p></div>`;
+  <h2>什么会让进度调整</h2><p>诊断结果、每周考核和研究方向都会改变练习与选修内容。可以压缩拓展，不能为了凑足日历而删去理解所需的复习。${publishedLessons().length?`正式课程已开始，第 1 天讲义于 ${E(displayDate(publicationDate(publishedLessons()[0])))} 发布。先采用前 6 讲总结的教学方法，后续视频研究用于改进讲义。每天只推进一个学习日，保留必要的练习与复习。`:"正式讲义发布后开始计算学习日；当前目录显示后续安排。"}</p></div>`;
 }
 function sources(){
+  const sourceCount=C.catalog.files.length;
+  const countType=type=>C.catalog.files.filter(source=>source.type===type).length;
   return `<div class="reading"><div class="eyebrow">参考资料 · ${E(C.catalog.checkedOn)}</div><h1>教材与参考资料</h1>
-  <p class="page-intro">“高等概率论”文件夹及其子文件夹的完整目录：31 份 PDF，包含 19 个教材分卷文件、1 本学习指导、4 份课件、4 份习题与答案、3 份讲义与笔记。下列页数均为 PDF 页数。</p>
+  <p class="page-intro">“高等概率论”文件夹及其子文件夹的课程参考资料目录：${sourceCount} 份 PDF，包含 ${countType("book")} 个教材分卷文件、${countType("guide")} 本学习指导、${countType("slides")} 份课件、${countType("exercises")} 份习题与答案、${countType("notes")} 份讲义与笔记。下列页数均为 PDF 页数。</p>
   <div class="notice"><strong>核查范围</strong>已核对书目信息、页数及各条目注明的页面，尚未精读全部资料，也未逐页检查所有文件的完整性。Cohn《Measure Theory》已确认残缺。网站列出资料索引，不提供原书 PDF。</div>
   <div class="catalog-tools"><label for="source-search">查找书名、作者或原文件名</label><input id="source-search" type="search" placeholder="例如：Shiryaev、胡太忠、GTM261" autocomplete="off">
-  <div class="catalog-filters" role="group" aria-label="资料类型">${[["all","全部",31],["book","教材",19],["guide","学习指导",1],["slides","课件",4],["exercises","习题与答案",4],["notes","讲义与笔记",3]].map(([id,label,count])=>`<button type="button" data-source-filter="${id}" aria-pressed="${id==="all"}">${label} <span>${count}</span></button>`).join("")}</div><p id="source-count" class="subtle" role="status" aria-live="polite">共 31 份资料</p></div>
+  <div class="catalog-filters" role="group" aria-label="资料类型">${[["all","全部"],["book","教材"],["guide","学习指导"],["slides","课件"],["exercises","习题与答案"],["notes","讲义与笔记"]].map(([id,label])=>`<button type="button" data-source-filter="${id}" aria-pressed="${id==="all"}">${label} <span>${id==="all"?sourceCount:countType(id)}</span></button>`).join("")}</div><p id="source-count" class="subtle" role="status" aria-live="polite">共 ${sourceCount} 份资料</p></div>
   <div id="source-catalog">${catalogEntries()}</div>
   <details class="reveal"><summary>各主要参考书在课程中的用途</summary>${C.sources.map(s=>`<h3>${E(s.title)}</h3><p>${E(s.role)}</p><p class="subtle">${E(s.note)}</p>`).join("")}</details>
   <h2>课程视频</h2><p>Claudio Landim · Probability Theory。指定 B 站合集共 26 段，总时长 27 小时 7 分 43 秒。教师风格研究由讲义编写方完成，无需学习者代看。</p>
-  <p><strong>工具辅助审阅进度：${C.video.reviewedParts} / ${C.video.totalParts} 段。</strong>前 6 讲已由 vidIQ 完成音视频分析，报告覆盖时长共 6 小时 00 分 58 秒；已复核带时间戳的教学方法记录。尚余 20 段，整套课程的先决条件仍未完成。</p>
+  <p><strong>工具辅助审阅进度：${C.video.reviewedParts} / ${C.video.totalParts} 段。</strong>前 6 讲已由 vidIQ 完成音视频分析，报告覆盖时长共 6 小时 00 分 58 秒；已复核带时间戳的教学方法记录。尚余 ${C.video.totalParts-C.video.reviewedParts} 段。${publishedLessons().length?"课程已采用这些阶段性结论开课，后续分析用于改进讲义。":"阶段性教学方法研究将用于正式讲义。"}</p>
   <p class="subtle">研究重点是讲课方式、思路与逻辑，供原创讲义重新组织内容。以下观察来自视频分析报告，覆盖时长为工具报告声明；数学转述另行核查。前 6 讲的观察属于阶段性结论。</p>
   <details class="reveal"><summary>第 1–6 讲：如何把知识讲清楚</summary><p class="subtle">区分报告中的教学行为与本课程拟采用的方法；不照搬原话、原内容或原课堂顺序。</p>${C.video.findings.map(f=>`<section><h3>${E(f.title)}</h3><p>${E(f.observation)}</p><p>用于本讲义：${E(f.adaptation)}</p><p class="subtle">记录定位：${f.evidence.map(e=>`<a href="https://www.youtube.com/watch?v=${E(e.videoId)}&t=${e.seconds}s" target="_blank" rel="noopener">第 ${e.part} 讲 ${E(e.timestamp)}</a>`).join(" · ")}</p></section>`).join("")}</details>
   <ul><li><a href="https://www.bilibili.com/video/BV1u5411c79Y/" target="_blank" rel="noopener">指定 B 站课程</a></li><li><a href="https://www.youtube.com/playlist?list=PLo4jXE-LdDTS5BYqea-LcHdtjKwVcepP7" target="_blank" rel="noopener">IMPA 官方课程视频</a></li><li><a href="https://w3.impa.br/~landim/lectures.html" target="_blank" rel="noopener">教师官方课程页</a></li><li><a href="https://w3.impa.br/~landim/Cursos/PT.pdf" target="_blank" rel="noopener">官方配套评论与习题</a></li></ul>
@@ -103,14 +142,28 @@ function bind(){
   document.querySelectorAll("[data-source-filter]").forEach(el=>el.addEventListener("click",()=>{sourceType=el.dataset.sourceFilter;filterSources();}));
   document.querySelectorAll("[data-answer]").forEach(el=>el.addEventListener("input",()=>{answers[el.dataset.answer]=el.value;const ok=save();$("#save-state").textContent=ok?"已保存到本浏览器 · 尚未提交":"保存不可用，请立即复制或导出";}));
   $("#export")?.addEventListener("click",()=>{$("#export-output").innerHTML=`<label class="answer-label" for="export-text">复制下面的文本到聊天</label><textarea id="export-text" readonly>${E(exportText())}</textarea><button id="copy">复制答案</button>`;$("#copy").addEventListener("click",async()=>{try{await navigator.clipboard.writeText(exportText());toast("已复制。请回到聊天粘贴并发送。");}catch{$("#export-text").focus();$("#export-text").select();toast("请使用系统复制操作复制选中的文本。");}});});
-  $("#download")?.addEventListener("click",()=>{const blob=new Blob([exportText()],{type:"text/plain;charset=utf-8"});const u=URL.createObjectURL(blob);const a=document.createElement("a");a.href=u;a.download="probability-diagnostic-answers.txt";a.click();setTimeout(()=>URL.revokeObjectURL(u),1000);});
+  $("#download")?.addEventListener("click",()=>downloadText(exportText(),"probability-diagnostic-answers.txt"));
+  document.querySelectorAll("[data-lesson-answer]").forEach(el=>el.addEventListener("input",()=>{
+    lessonAnswers[el.dataset.lessonAnswer]=el.value;
+    try{localStorage.setItem(assessmentContext.storageKey,JSON.stringify(lessonAnswers));lessonPersistent=true;}catch{lessonPersistent=false;}
+    $("#lesson-save-state").textContent=lessonPersistent?"已保存到本浏览器 · 本次修改尚未提交到聊天":"保存不可用，请立即复制或导出";
+    if($("#lesson-export-text"))$("#lesson-export-text").value=lessonExportText();
+  }));
+  $("#lesson-export")?.addEventListener("click",()=>{
+    $("#lesson-export-output").innerHTML=`<label class="answer-label" for="lesson-export-text">复制下面的文本到聊天发送</label><textarea id="lesson-export-text" readonly>${E(lessonExportText())}</textarea><button id="lesson-copy" type="button">复制答案</button>`;
+    $("#lesson-copy").addEventListener("click",async()=>{try{await navigator.clipboard.writeText(lessonExportText());toast("已复制。请回到聊天粘贴并发送。");}catch{$("#lesson-export-text").focus();$("#lesson-export-text").select();toast("请使用系统复制操作复制选中的文本。");}});
+  });
+  $("#lesson-download")?.addEventListener("click",()=>downloadText(lessonExportText(),`probability-day-${String(assessmentContext.day).padStart(2,"0")}-answers.txt`));
+  makeLessonToc();
 }
 function render(){
+  assessmentContext=null;
   const hash=location.hash||"#home";
   let html=hash==="#home"?home():hash==="#roadmap"?roadmap():hash==="#diagnostic"?diagnostic():hash==="#method"?method():hash==="#sources"?sources():hash.startsWith("#day-")?day(Number(hash.slice(5))):`<h1>未找到这一页</h1><a href="#home">返回首页</a>`;
-  $("#main").innerHTML=html;nav();bind();$("#sidebar").classList.remove("open");$("#menu").setAttribute("aria-expanded","false");window.scrollTo(0,0);document.title=($("#main h1")?.textContent||"概率论与随机过程")+" · 概率论与随机过程";
+  $("#main").innerHTML=html;nav();bind();$("#sidebar").classList.remove("open");$("#menu").setAttribute("aria-expanded","false");$("#course-stage").textContent=publishedLessons().length?`已发布 ${publishedLessons().length} / 60 天讲义`:"课程准备中";window.scrollTo(0,0);document.title=($("#main h1")?.textContent||"概率论与随机过程")+" · 概率论与随机过程";
 }
 $("#search").addEventListener("input",nav);
 $("#menu").addEventListener("click",()=>{$("#sidebar").classList.toggle("open");$("#menu").setAttribute("aria-expanded",String($("#sidebar").classList.contains("open")));});
 window.addEventListener("hashchange",render);
+$(".skip").addEventListener("click",event=>{event.preventDefault();$("#main").focus();$("#main").scrollIntoView({block:"start"});});
 render();
