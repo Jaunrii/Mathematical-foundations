@@ -1,6 +1,6 @@
 {
-  "checkedOn": "2026-10-20",
-  "scope": "桌面“高等概率论”文件夹及其同名子文件夹；只读核查",
+  "checkedOn": "2026-10-21",
+  "scope": "桌面“高等概率论”文件夹及其同名子文件夹的课程参考资料；按用户要求排除个人课堂草稿，仅作只读核查",
   "files": [
     {
       "relativePath": "High-Dimensional Probability (Roman Vershynin) (Z-Library).pdf",
@@ -133,17 +133,6 @@
       "completeness": "not_audited_page_by_page"
     },
     {
-      "relativePath": "高等概率论/Durret.pdf",
-      "title": "概率空间与测度手写笔记（Durret.pdf）",
-      "authors": [],
-      "edition": null,
-      "pages": 6,
-      "type": "notes",
-      "verified": "目视核验PDF第1–4页及其文字提取",
-      "note": "6页手写笔记，含概率空间、测度性质和实线上的测度；作者未署名，不能因文件名而列成Rick Durrett著作。",
-      "completeness": "not_audited_page_by_page"
-    },
-    {
       "relativePath": "高等概率论/GTM261.pdf",
       "title": "Probability and Stochastics",
       "authors": [
@@ -192,7 +181,7 @@
       "pages": 432,
       "type": "book",
       "verified": "内容介绍、扉页、版权页、前言及既有目录核查；PDF第2、6–12页",
-      "note": "2019年版本；完整教材文件与6页Durret.pdf手写笔记分别登记。尚未精读全文。",
+      "note": "2019年版本；尚未精读全文。",
       "completeness": "not_audited_page_by_page"
     },
     {
@@ -257,17 +246,6 @@
       "type": "exercises",
       "verified": "目视核验PDF第1–4页的印刷习题及标注",
       "note": "25页习题摘录，无书名页或版权页；“第三版”来自文件名，尚未独立核实作者和版次，不据此把323页主教材改标成第三版。",
-      "completeness": "not_audited_page_by_page"
-    },
-    {
-      "relativePath": "高等概率论/概率论草稿纸.pdf",
-      "title": "概率论草稿纸",
-      "authors": [],
-      "edition": null,
-      "pages": 5,
-      "type": "notes",
-      "verified": "目视核验PDF第1–4页",
-      "note": "5页题目剪贴与手写演算，作者未署名；作为学习记录登记，不作为权威解答。",
       "completeness": "not_audited_page_by_page"
     },
     {
@@ -402,12 +380,12 @@
   "counts": {
     "book": 19,
     "slides": 4,
-    "notes": 3,
+    "notes": 1,
     "exercises": 4,
     "guide": 1
   },
-  "fileCount": 31,
-  "countNote": "31是PDF文件数，不是31部独立教材。19个教材分卷文件（其中Cohn为残缺文件）、1个学习指导、4个课件、4个习题/答案文件及3个讲义/笔记文件。Shiryaev和袁德美/王学军的上下卷分别登记；同题习题文件保留但不重复计作书。",
+  "fileCount": 29,
+  "countNote": "29是纳入课程参考资料的PDF文件数，不是29部独立教材。19个教材分卷文件（其中Cohn为残缺文件）、1个学习指导、4个课件、4个习题/答案文件及1个讲义/笔记文件。Shiryaev和袁德美/王学军的上下卷分别登记；同题习题文件保留但不重复计作书。",
   "limitations": [
     "核查书目、页数和指定页面，不等于精读全部教材。",
     "除已确认的Cohn残缺外，其他文件尚未逐页检查完整性。",
