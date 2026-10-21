@@ -13,6 +13,8 @@
     "经过核实的教材定位与可选拓展"
   ],
   "videoPrerequisite": {
+    "required": false,
+    "blocksFormalLessons": false,
     "status": "in-progress"
   }
 }
